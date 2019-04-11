@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptMerger", "ScriptMerger\ScriptMerger.csproj", "{8B4425EC-34A2-4C29-858D-D216606C9311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptMgerger", "ScriptMgerger\ScriptMgerger.csproj", "{31D3690C-5160-4935-8A19-09980A7CDA2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8B4425EC-34A2-4C29-858D-D216606C9311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B4425EC-34A2-4C29-858D-D216606C9311}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B4425EC-34A2-4C29-858D-D216606C9311}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B4425EC-34A2-4C29-858D-D216606C9311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D3690C-5160-4935-8A19-09980A7CDA2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D3690C-5160-4935-8A19-09980A7CDA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D3690C-5160-4935-8A19-09980A7CDA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D3690C-5160-4935-8A19-09980A7CDA2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4555258A-5C0D-40EB-8CFE-E55DFDC635AC}
+		SolutionGuid = {6397F11E-7EB5-424A-BC95-39144B2A6768}
 	EndGlobalSection
 EndGlobal

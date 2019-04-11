@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScriptMerger.Properties
+namespace ScriptMgerger.Properties
 {
 
 
