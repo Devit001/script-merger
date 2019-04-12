@@ -65,10 +65,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 15);
+            this.label1.Size = new System.Drawing.Size(88, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Directory:";
             // 
@@ -78,7 +78,7 @@
             this.buttonMerge.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMerge.Image = ((System.Drawing.Image)(resources.GetObject("buttonMerge.Image")));
             this.buttonMerge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMerge.Location = new System.Drawing.Point(608, 60);
+            this.buttonMerge.Location = new System.Drawing.Point(698, 60);
             this.buttonMerge.Name = "buttonMerge";
             this.buttonMerge.Size = new System.Drawing.Size(90, 35);
             this.buttonMerge.TabIndex = 3;
@@ -106,7 +106,7 @@
             this.buttonSet.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSet.Image = ((System.Drawing.Image)(resources.GetObject("buttonSet.Image")));
             this.buttonSet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSet.Location = new System.Drawing.Point(704, 60);
+            this.buttonSet.Location = new System.Drawing.Point(608, 60);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(84, 35);
             this.buttonSet.TabIndex = 5;
@@ -121,10 +121,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 15);
+            this.label2.Size = new System.Drawing.Size(136, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "Files Processed:";
             // 
@@ -141,6 +141,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.richTextBoxOutput);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "ScriptMerger";
             this.Load += new System.EventHandler(this.Form1_Load);
