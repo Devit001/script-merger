@@ -47,9 +47,11 @@ namespace ScriptMgerger
             richTextBoxOutput.Clear();
         }
 
-        private string[] GetProyFiles(string path)
+        private List<string> GetProyFiles(string path)
         {
-            return Directory.GetFiles(path);
+            var files = Directory.GetFiles(path, "*.txt").ToList();
+            files.Sort();
+            return files;
         }
 
         private void Merge()
@@ -57,7 +59,7 @@ namespace ScriptMgerger
             var proyFiles = GetProyFiles(textBoxPath.Text);
 
             foreach (var f in proyFiles)
-                richTextBoxOutput.AppendText(f);
+                richTextBoxOutput.AppendText(f + "\n");
         }
 
         private void ShowFolderBrowserDialog()
