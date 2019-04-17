@@ -45,12 +45,16 @@
             this.richTextBoxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxOutput.DetectUrls = false;
             this.richTextBoxOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxOutput.Location = new System.Drawing.Point(12, 101);
             this.richTextBoxOutput.Name = "richTextBoxOutput";
+            this.richTextBoxOutput.ReadOnly = true;
             this.richTextBoxOutput.Size = new System.Drawing.Size(776, 369);
             this.richTextBoxOutput.TabIndex = 0;
+            this.richTextBoxOutput.TabStop = false;
             this.richTextBoxOutput.Text = "";
+            this.richTextBoxOutput.WordWrap = false;
             // 
             // textBoxPath
             // 
