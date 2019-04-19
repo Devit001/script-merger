@@ -16,11 +16,14 @@ namespace ScriptMgerger
     {
 
         //future settings
+        private const int BufferSize = 1024 * 500;
+        private const string ScriptSeparator = "GO";
         private const string CommentStart = "//";
         private const string RootScriptFolder = "Scripts";
         private const string LastUsedPath = "LastUsedPath.txt";
         //todo: find a more subtle way to save the settings  rather than using a file
 
+        private bool Error;
         private FileStream OutputFile;
         private string CurrentVersionFolder;
         private string BasePath;
@@ -66,8 +69,9 @@ namespace ScriptMgerger
 
         private void Merge()
         {
+            Error = false;
             var proyFiles = GetProyFiles(textBoxPath.Text);
-            OutputFile = File.Create($"{CurrentVersionFolder}OUTPUT_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.sql");// 
+            OutputFile = File.Create(Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}.sql"));// 
             var indexOfRootScriptFolder = CurrentVersionFolder.LastIndexOf(RootScriptFolder);
             try
             {
@@ -77,7 +81,7 @@ namespace ScriptMgerger
                 BasePath = CurrentVersionFolder.Substring(0, indexOfRootScriptFolder);
 
                 foreach (var f in proyFiles)
-                {
+                {//todo: test, if there was an error does it exit the loop?
                     richTextBoxOutput.AppendText($"<<<{Path.GetFileName(f)}>>>");
 
                     ProcessFile(f);
@@ -87,13 +91,15 @@ namespace ScriptMgerger
             }
             catch (Exception e)
             {
+                Error = true;
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 OutputFile.Close();
             }
-            //open file if success
+            if (!Error)
+                MessageBox.Show("Archivo procesado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void ProcessFile(string projectFile)
@@ -111,23 +117,42 @@ namespace ScriptMgerger
                     throw new Exception($"Error al procesar {projectFile}\n\nNo se encontró:{currentScript}");
                 }
 
-                WriteToOutput(currentScript);
+                if (Error)
+                    break;
+
+                WriteToOutput(line);
             }
         }
 
         private void WriteToOutput(string script)
         {
-            var scriptStream = File.OpenRead(script);
-            //read from script and write to output
+            string newLine = "";
+            FileStream scriptStream = null;
             try
             {
-                //OutputFile.
-                //scriptStream.si;
+                scriptStream = File.OpenRead(Path.Combine(BasePath, script));
 
-                richTextBoxOutput.AppendText("      " + script);
+                string s = $"/* {script} */ {newLine}";
+                byte[] buffer = Encoding.Default.GetBytes(s);
+                OutputFile.Write(buffer, 0, buffer.Length);
+
+                int bytesRead = 1;
+                buffer = new byte[BufferSize];
+
+                while(bytesRead > 0)
+                {
+                    bytesRead = scriptStream.Read(buffer, 0, BufferSize);
+                    OutputFile.Write(buffer, 0, buffer.Length);
+                }
+
+                buffer = Encoding.Default.GetBytes(newLine + ScriptSeparator + newLine);
+                OutputFile.Write(buffer, 0, buffer.Length);
+
+                richTextBoxOutput.AppendText("\n      " + script);
             }
             catch(Exception e)
             {
+                Error = true;
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
