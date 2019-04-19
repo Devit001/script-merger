@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace ScriptMgerger
 {
@@ -24,7 +25,7 @@ namespace ScriptMgerger
         //todo: find a more subtle way to save the settings  rather than using a file
 
         private bool Error;
-        private FileStream OutputFile;
+        private StreamWriter OutputFile;
         private string CurrentVersionFolder;
         private string BasePath;
         
@@ -71,7 +72,8 @@ namespace ScriptMgerger
         {
             Error = false;
             var proyFiles = GetProyFiles(textBoxPath.Text);
-            OutputFile = File.Create(Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}.sql"));// 
+            string outputFileName = Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}.sql");
+            OutputFile = File.CreateText(outputFileName);// 
             var indexOfRootScriptFolder = CurrentVersionFolder.LastIndexOf(RootScriptFolder);
             try
             {
@@ -98,8 +100,12 @@ namespace ScriptMgerger
             {
                 OutputFile.Close();
             }
+
             if (!Error)
+            {
                 MessageBox.Show("Archivo procesado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                Process.Start("explorer.exe", "/select," + outputFileName);
+            }
         }
 
         private void ProcessFile(string projectFile)
@@ -126,26 +132,27 @@ namespace ScriptMgerger
 
         private void WriteToOutput(string script)
         {
-            string newLine = "";
-            FileStream scriptStream = null;
+            string newLine = "\r\n";
+            StreamReader scriptStream = null;
             try
             {
-                scriptStream = File.OpenRead(Path.Combine(BasePath, script));
-
+                scriptStream = File.OpenText(Path.Combine(BasePath, script));
+                
                 string s = $"/* {script} */ {newLine}";
-                byte[] buffer = Encoding.Default.GetBytes(s);
+                char [] buffer = Encoding.UTF8.GetChars(Encoding.UTF8.GetBytes(s));
                 OutputFile.Write(buffer, 0, buffer.Length);
+                
 
                 int bytesRead = 1;
-                buffer = new byte[BufferSize];
+                buffer = new char[BufferSize];
 
                 while(bytesRead > 0)
                 {
-                    bytesRead = scriptStream.Read(buffer, 0, BufferSize);
-                    OutputFile.Write(buffer, 0, buffer.Length);
+                    bytesRead = scriptStream.ReadBlock(buffer, 0, BufferSize);
+                    OutputFile.Write(buffer, 0, bytesRead);
                 }
 
-                buffer = Encoding.Default.GetBytes(newLine + ScriptSeparator + newLine);
+                buffer = Encoding.UTF8.GetChars(Encoding.UTF8.GetBytes(newLine + ScriptSeparator + newLine + newLine + newLine));
                 OutputFile.Write(buffer, 0, buffer.Length);
 
                 richTextBoxOutput.AppendText("\n      " + script);
