@@ -17,12 +17,42 @@ namespace ScriptMgerger
     {
 
         //future settings
-        private const int BufferSize = 1024 * 500;
-        private const string ScriptSeparator = "GO";
-        private const string CommentStart = "//";
-        private const string RootScriptFolder = "Scripts";
-        private const string LastUsedPath = "LastUsedPath.txt";
-        //todo: find a more subtle way to save the settings  rather than using a file
+        private int BufferSize // 1024 * 500;
+        {
+            get
+            {
+                return Properties.Settings.Default.BufferSize;
+            }
+        }
+        private string ScriptSeparator
+        {
+            get
+            {
+                return Properties.Settings.Default.ScriptSeparator;
+            }
+        }
+        private string CommentStart
+        {
+            get
+            {
+                return Properties.Settings.Default.CommentStart;
+            }
+        }
+        private string RootScriptFolder
+        {
+            get
+            {
+                return Properties.Settings.Default.RootScriptFolder;
+            }
+        }
+        private string[] LastUsedPath
+        {
+            get
+            {
+                return Properties.Settings.Default.LastUsedPaths.Cast<string>().ToArray();
+            }
+        }
+
 
         private bool Error;
         private StreamWriter OutputFile;
@@ -32,7 +62,6 @@ namespace ScriptMgerger
         public Form1()
         {
             InitializeComponent();
-            richTextBoxOutput.HideSelection = false;
         }
 
         private void buttonSet_Click(object sender, EventArgs e)
@@ -85,7 +114,7 @@ namespace ScriptMgerger
                 BasePath = CurrentVersionFolder.Substring(0, indexOfRootScriptFolder);
 
                 foreach (var f in proyFiles)
-                {//todo: test, if there was an error does it exit the loop?
+                {
                     richTextBoxOutput.AppendText($"<<<{Path.GetFileName(f)}>>>");
 
                     ProcessFile(f);
@@ -188,14 +217,12 @@ namespace ScriptMgerger
 
         private string GetLastUsedPath()
         {
-            return File.Exists(LastUsedPath)
-                        ? File.ReadAllText(LastUsedPath)
-                        : "";
+            return LastUsedPath.FirstOrDefault();
         }
 
         private void SetLastUsedPath(string usedPath)
         {
-            File.WriteAllText(LastUsedPath, usedPath);
+            //File.WriteAllText(LastUsedPath, usedPath);
         }
 
     }
