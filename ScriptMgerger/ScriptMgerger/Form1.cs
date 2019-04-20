@@ -45,7 +45,7 @@ namespace ScriptMgerger
                 return Properties.Settings.Default.RootScriptFolder;
             }
         }
-        private string[] LastUsedPath
+        private string[] LastUsedPaths
         {
             get
             {
@@ -82,13 +82,17 @@ namespace ScriptMgerger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBoxPath.Text = CurrentVersionFolder = GetLastUsedPath();
+            CurrentVersionFolder = GetLastUsedPath();
         }
 
         private void Clean()
         {
-            textBoxPath.Clear();
             richTextBoxOutput.Clear();
+            if(MessageBox.Show("¿Limpiar lista de directorios recientes también?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Properties.Settings.Default.LastUsedPaths.Clear();
+                Properties.Settings.Default.Save();
+            }
         }
 
         private List<string> GetProyFiles(string path)
@@ -100,9 +104,15 @@ namespace ScriptMgerger
 
         private void Merge()
         {
+            if (string.IsNullOrWhiteSpace(CurrentVersionFolder))
+            {
+                MessageBox.Show("Selecciona un directorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             richTextBoxOutput.Text = "";
             Error = false;
-            var proyFiles = GetProyFiles(textBoxPath.Text);
+            var proyFiles = GetProyFiles(CurrentVersionFolder);
             string outputFileName = Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.sql");
             OutputFile = File.CreateText(outputFileName);// 
             var indexOfRootScriptFolder = CurrentVersionFolder.LastIndexOf(RootScriptFolder);
@@ -210,19 +220,33 @@ namespace ScriptMgerger
             if (dialogResult == DialogResult.OK)
             {
                 CurrentVersionFolder = folderBrowserDialog1.SelectedPath;
-                textBoxPath.Text = folderBrowserDialog1.SelectedPath;
                 SetLastUsedPath( folderBrowserDialog1.SelectedPath);
             }
         }
 
         private string GetLastUsedPath()
         {
-            return LastUsedPath.FirstOrDefault();
+            comboBox1.DataSource = LastUsedPaths;
+            return LastUsedPaths.FirstOrDefault();
         }
 
         private void SetLastUsedPath(string usedPath)
         {
-            //File.WriteAllText(LastUsedPath, usedPath);
+            if (LastUsedPaths.Contains(CurrentVersionFolder))
+            {
+                Properties.Settings.Default.LastUsedPaths.Remove(CurrentVersionFolder);
+            }
+
+            Properties.Settings.Default.LastUsedPaths.Insert(0, CurrentVersionFolder);
+
+            int maxEntries = 5;
+            if(Properties.Settings.Default.LastUsedPaths.Count > maxEntries)
+            {
+                Properties.Settings.Default.LastUsedPaths.RemoveAt(maxEntries);
+            }
+                
+            comboBox1.DataSource = LastUsedPaths;
+            Properties.Settings.Default.Save();
         }
 
     }

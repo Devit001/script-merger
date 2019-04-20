@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
-            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonMerge = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // richTextBoxOutput
@@ -57,16 +57,6 @@
             this.richTextBoxOutput.TabStop = false;
             this.richTextBoxOutput.Text = "";
             this.richTextBoxOutput.WordWrap = false;
-            // 
-            // textBoxPath
-            // 
-            this.textBoxPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPath.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPath.Location = new System.Drawing.Point(15, 31);
-            this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(773, 23);
-            this.textBoxPath.TabIndex = 1;
             // 
             // label1
             // 
@@ -134,18 +124,29 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Files Processed:";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(15, 33);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(773, 22);
+            this.comboBox1.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 482);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonSet);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonMerge);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.richTextBoxOutput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -159,7 +160,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBoxOutput;
-        private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonMerge;
         private System.Windows.Forms.Button buttonClear;
@@ -167,6 +167,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
