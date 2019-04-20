@@ -64,9 +64,9 @@
             this.label1.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 17);
+            this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Directory:";
+            this.label1.Text = "Directorio:";
             // 
             // buttonMerge
             // 
@@ -74,11 +74,11 @@
             this.buttonMerge.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMerge.Image = ((System.Drawing.Image)(resources.GetObject("buttonMerge.Image")));
             this.buttonMerge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMerge.Location = new System.Drawing.Point(698, 60);
+            this.buttonMerge.Location = new System.Drawing.Point(678, 62);
             this.buttonMerge.Name = "buttonMerge";
-            this.buttonMerge.Size = new System.Drawing.Size(90, 35);
+            this.buttonMerge.Size = new System.Drawing.Size(110, 35);
             this.buttonMerge.TabIndex = 3;
-            this.buttonMerge.Text = "  Merge";
+            this.buttonMerge.Text = "   Unir";
             this.buttonMerge.UseVisualStyleBackColor = true;
             this.buttonMerge.Click += new System.EventHandler(this.buttonMerge_Click);
             // 
@@ -88,11 +88,11 @@
             this.buttonClear.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClear.Image = ((System.Drawing.Image)(resources.GetObject("buttonClear.Image")));
             this.buttonClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonClear.Location = new System.Drawing.Point(513, 60);
+            this.buttonClear.Location = new System.Drawing.Point(446, 62);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(89, 35);
+            this.buttonClear.Size = new System.Drawing.Size(110, 35);
             this.buttonClear.TabIndex = 4;
-            this.buttonClear.Text = "   Clear";
+            this.buttonClear.Text = "   Limpiar";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
@@ -102,11 +102,11 @@
             this.buttonSet.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSet.Image = ((System.Drawing.Image)(resources.GetObject("buttonSet.Image")));
             this.buttonSet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSet.Location = new System.Drawing.Point(608, 60);
+            this.buttonSet.Location = new System.Drawing.Point(562, 62);
             this.buttonSet.Name = "buttonSet";
-            this.buttonSet.Size = new System.Drawing.Size(84, 35);
+            this.buttonSet.Size = new System.Drawing.Size(110, 35);
             this.buttonSet.TabIndex = 5;
-            this.buttonSet.Text = "   Set";
+            this.buttonSet.Text = "   Examinar";
             this.buttonSet.UseVisualStyleBackColor = true;
             this.buttonSet.Click += new System.EventHandler(this.buttonSet_Click);
             // 
@@ -120,9 +120,9 @@
             this.label2.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 17);
+            this.label2.Size = new System.Drawing.Size(168, 17);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Files Processed:";
+            this.label2.Text = "Archivos Procesados:";
             // 
             // comboBox1
             // 
