@@ -32,6 +32,7 @@ namespace ScriptMgerger
         public Form1()
         {
             InitializeComponent();
+            richTextBoxOutput.HideSelection = false;
         }
 
         private void buttonSet_Click(object sender, EventArgs e)
