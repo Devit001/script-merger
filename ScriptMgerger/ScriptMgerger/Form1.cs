@@ -70,9 +70,10 @@ namespace ScriptMgerger
 
         private void Merge()
         {
+            richTextBoxOutput.Text = "";
             Error = false;
             var proyFiles = GetProyFiles(textBoxPath.Text);
-            string outputFileName = Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}.sql");
+            string outputFileName = Path.Combine(CurrentVersionFolder, $"OUTPUT_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.sql");
             OutputFile = File.CreateText(outputFileName);// 
             var indexOfRootScriptFolder = CurrentVersionFolder.LastIndexOf(RootScriptFolder);
             try
@@ -101,7 +102,11 @@ namespace ScriptMgerger
                 OutputFile.Close();
             }
 
-            if (!Error)
+            if (Error)
+            {
+                File.Delete(outputFileName);
+            }
+            else
             {
                 MessageBox.Show("Archivo procesado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Process.Start("explorer.exe", "/select," + outputFileName);
@@ -119,8 +124,8 @@ namespace ScriptMgerger
 
                 if (!File.Exists(currentScript))
                 {
-                    richTextBoxOutput.AppendText("      ***Error, no encontrado***  " + currentScript);
-                    throw new Exception($"Error al procesar {projectFile}\n\nNo se encontró:{currentScript}");
+                    richTextBoxOutput.AppendText("\n      ***Error, no encontrado***\n            " + currentScript);
+                    throw new Exception($"Error al procesar: {projectFile}\n\nNo se encontró:\n{currentScript}");
                 }
 
                 if (Error)
