@@ -11,7 +11,7 @@ Programa para unir varios archivos en un solo script SQL de acuerdo a los que se
 Los comentarios deben iniciar con **//**
 
 
-## Cosas que podrían mejorarse
+### Cosas que podrían mejorarse
 
 Una pantalla para escoger algunas preferencias como:
 - Nombre del directorio raíz para Scripts (Default "Scripts")
