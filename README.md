@@ -8,7 +8,9 @@ Programa para unir varios archivos en un solo script SQL de acuerdo a los que se
 
 ### Notas
 Los comentarios deben iniciar con **//**
+
 Los archivos de la carpeta seleccionada se procesan alfabéticamente, pero el contenido de estos se procesa tal y como está.
+
 Se recomienda que los archivos estén codificados con **UTF-8**. 
 
 
