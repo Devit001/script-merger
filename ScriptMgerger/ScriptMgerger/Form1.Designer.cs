@@ -1,4 +1,4 @@
-﻿namespace ScriptMgerger
+﻿namespace ScriptMerger
 {
     partial class Form1
     {

@@ -11,7 +11,7 @@ using System.IO;
 using System.Configuration;
 using System.Diagnostics;
 
-namespace ScriptMgerger
+namespace ScriptMerger
 {
     public partial class Form1 : Form
     {
