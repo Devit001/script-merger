@@ -92,6 +92,8 @@ namespace ScriptMgerger
             {
                 Properties.Settings.Default.LastUsedPaths.Clear();
                 Properties.Settings.Default.Save();
+                comboBox1.DataSource = null;
+                comboBox1.Text = null;
             }
         }
 
@@ -104,11 +106,20 @@ namespace ScriptMgerger
 
         private void Merge()
         {
+            CurrentVersionFolder = comboBox1.Text;
+
             if (string.IsNullOrWhiteSpace(CurrentVersionFolder))
             {
                 MessageBox.Show("Selecciona un directorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (!Directory.Exists(CurrentVersionFolder))
+            {
+                MessageBox.Show($"El directorio {CurrentVersionFolder} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             richTextBoxOutput.Text = "";
             Error = false;
@@ -150,6 +161,7 @@ namespace ScriptMgerger
             {
                 MessageBox.Show("Archivo procesado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Process.Start("explorer.exe", "/select," + outputFileName);
+                AddLastUsedPath(CurrentVersionFolder);
             }
         }
 
@@ -183,7 +195,7 @@ namespace ScriptMgerger
             {
                 scriptStream = File.OpenText(Path.Combine(BasePath, script));
                 
-                string s = $"/* {script} */ {newLine}";
+                string s = $"-->>>{script} {newLine}";
                 char [] buffer = Encoding.UTF8.GetChars(Encoding.UTF8.GetBytes(s));
                 OutputFile.Write(buffer, 0, buffer.Length);
                 
@@ -219,8 +231,7 @@ namespace ScriptMgerger
             var dialogResult = folderBrowserDialog1.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
-                CurrentVersionFolder = folderBrowserDialog1.SelectedPath;
-                SetLastUsedPath( folderBrowserDialog1.SelectedPath);
+                AddLastUsedPath(folderBrowserDialog1.SelectedPath);
             }
         }
 
@@ -230,14 +241,14 @@ namespace ScriptMgerger
             return LastUsedPaths.FirstOrDefault();
         }
 
-        private void SetLastUsedPath(string usedPath)
+        private void AddLastUsedPath(string usedPath)
         {
-            if (LastUsedPaths.Contains(CurrentVersionFolder))
+            if (LastUsedPaths.Contains(usedPath))
             {
-                Properties.Settings.Default.LastUsedPaths.Remove(CurrentVersionFolder);
+                Properties.Settings.Default.LastUsedPaths.Remove(usedPath);
             }
 
-            Properties.Settings.Default.LastUsedPaths.Insert(0, CurrentVersionFolder);
+            Properties.Settings.Default.LastUsedPaths.Insert(0, usedPath);
 
             int maxEntries = 5;
             if(Properties.Settings.Default.LastUsedPaths.Count > maxEntries)
@@ -249,5 +260,10 @@ namespace ScriptMgerger
             Properties.Settings.Default.Save();
         }
 
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Merge();
+        }
     }
 }
